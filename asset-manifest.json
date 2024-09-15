@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Nikitadhonnar16/camera-list/static/css/main.0636bb16.css",
+    "main.js": "/Nikitadhonnar16/camera-list/static/js/main.5f947e86.js",
+    "static/js/453.b519af22.chunk.js": "/Nikitadhonnar16/camera-list/static/js/453.b519af22.chunk.js",
+    "static/media/logo.svg": "/Nikitadhonnar16/camera-list/static/media/logo.19a2d38382b7b2a9faaab5e7134d7a7e.svg",
+    "index.html": "/Nikitadhonnar16/camera-list/index.html",
+    "main.0636bb16.css.map": "/Nikitadhonnar16/camera-list/static/css/main.0636bb16.css.map",
+    "main.5f947e86.js.map": "/Nikitadhonnar16/camera-list/static/js/main.5f947e86.js.map",
+    "453.b519af22.chunk.js.map": "/Nikitadhonnar16/camera-list/static/js/453.b519af22.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0636bb16.css",
+    "static/js/main.5f947e86.js"
+  ]
+}
