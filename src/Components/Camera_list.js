@@ -4,10 +4,9 @@ import logo from "../Assets/imgs/logo.svg";
 import "../Assets/css/Camera_list.css";
 import { IoIosSearch } from "react-icons/io";
 import { RiCloudLine } from "react-icons/ri";
-import { BsHddStack } from "react-icons/bs";
+import { BsHddStack, BsWifi } from "react-icons/bs";
 import { AiOutlineStop } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
-import { BsWifi } from "react-icons/bs";
 
 const Camera_list = () => {
   // State for camera data, location, filters, search, and pagination
@@ -46,7 +45,7 @@ const Camera_list = () => {
 
   useEffect(() => {
     FetchData();
-  }, [Data]);
+  }, []);
 
   // Filter the camera data based on selected location, status, and search term
   const FilteredData = Data.filter((cur) => {
@@ -57,11 +56,9 @@ const Camera_list = () => {
     const StatusMatch = SelectedStatus ? cur.status === SelectedStatus : true;
 
     const MatchSearch = searchData
-      ? cur.name.toLowerCase().includes(searchData.toLocaleLowerCase()) ||
-        cur.location
-          .toLocaleLowerCase()
-          .includes(searchData.toLocaleLowerCase()) ||
-        cur.status.toLocaleLowerCase().includes(searchData.toLocaleLowerCase())
+      ? cur.name.toLowerCase().includes(searchData.toLowerCase()) ||
+        cur.location.toLowerCase().includes(searchData.toLowerCase()) ||
+        cur.status.toLowerCase().includes(searchData.toLowerCase())
       : true;
 
     return LocationMatch && StatusMatch && MatchSearch;
@@ -81,11 +78,15 @@ const Camera_list = () => {
   const startItem = (page - 1) * pageSize + 1;
   const endItem = Math.min(page * pageSize, totalItems);
 
+  const getStatusClass = (value) => {
+    return value === "A" ? "border-success" : "border-warning";
+  };
+
   return (
     <div className="wrapper mt-5">
       <div className="mx-4">
         {/* Logo */}
-        <div className="logo d-flex justify-content-center ">
+        <div className="logo d-flex justify-content-center">
           <img src={logo} className="logo" alt="" />
         </div>
         <div className="d-flex justify-content-between">
@@ -156,20 +157,50 @@ const Camera_list = () => {
       {FilteredData.slice(startItem - 1, endItem).map((cur) => (
         <div className="row mx-4 bg-white table-list" key={cur.id}>
           <div className="col">
+            {/* Conditional rendering of the circle */}
             <input type="checkbox" className="me-3" />
-            {cur.name}
+
+            <span
+              className={`rounded-circle ${
+                cur.health.cloud && cur.health.device
+                  ? "circle-green"
+                  : "circle-red"
+              }`}
+            />
+            {cur.name || "N/A"}
           </div>
           <div className="col justify-content-center d-flex gap-2 ms-3">
-            <RiCloudLine className="mt-1" />
-            {cur.health.cloud}
-            <BsHddStack className="mt-1" />
-            {cur.health.device}
+            <div
+              className={`rounded-border border ${getStatusClass(
+                cur.health.cloud
+              )}`}
+            >
+              {cur.health.cloud}
+            </div>
+            <RiCloudLine className="mt-1" size={18} />
+            <div
+              className={`rounded-border border ${getStatusClass(
+                cur.health.device
+              )}`}
+            >
+              {cur.health.device}
+            </div>
+            <BsHddStack className="mt-1" size={18} />
           </div>
-          <div className="col ms-3 text-center">{cur.location}</div>
-          <div className="col ms-3 text-center">{cur.recorder}</div>
-          <div className="col ms-3 text-center">{cur.tasks} Tasks</div>
-          <div className="col text-center">
-            <span className="px-2">{cur.status}</span>
+          <div className="col ms-3 text-center">{cur.location || "N/A"}</div>
+          <div className="col ms-3 text-center">{cur.recorder || "N/A"}</div>
+          <div className="col ms-3 text-center">{cur.tasks || "N/A"} Tasks</div>
+          <div className="col text-center my-auto">
+            <span
+              style={{
+                color: cur.status === "Active" ? "#0ee298" : "",
+                backgroundColor:
+                  cur.status === "Active" ? "#dcf8ee" : "#f3f3f4",
+              }}
+              className="px-2"
+            >
+              {cur.status || "N/A"}
+            </span>
           </div>
           <div className="col-1">
             <AiOutlineStop className="ms-4" />
