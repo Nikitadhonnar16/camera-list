@@ -16,3 +16,47 @@
 .Location {
   width: 50px;
 }
+
+.search {
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+}
+
+.search-field {
+  border: none;
+  outline: none;
+  background-color: #e0e0e1;
+}
+
+.search-field:focus {
+  box-shadow: none; /* Remove box-shadow on focus */
+  border: none; /* Ensure there's no border on focus */
+}
+
+.search {
+  border: 1px solid #f3f3f4;
+  padding: 10px;
+  border-radius: 12px !important;
+  -webkit-border-radius: 12px !important;
+  -moz-border-radius: 12px !important;
+  -ms-border-radius: 12px !important;
+  -o-border-radius: 12px !important;
+  background-color: #e0e0e1;
+}
+
+.icon-style {
+  font-size: 24px;
+  color: #c4c4ca;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.status {
+  color: green;
+  background-color: lightgreen;
+}
